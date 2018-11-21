@@ -2,7 +2,7 @@ import socket
 
 multicast_group = '224.1.1.1'
 multicast_port = 5007
-content = "Hello from the other side!"
+content = "Hello from the other side! "
 # regarding socket.IP_MULTICAST_TTL
 # ---------------------------------
 # for all packets sent, after two hops on the network the packet will not

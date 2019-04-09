@@ -25,3 +25,15 @@ tcpdump -i eth0 udp -n
  * -i switch only capture from desire interface
  * Add protocol to specifiy protocol (udp/tcp)
  * -n doesn't convert addresses (i.e., host addresses, port numbers, etc.) to names
+
+
+### NTP
+
+#### Airboard
+  
+Set the date using an NTP server 
+* ntpdate -b 10.42.0.15
+
+#### Server side
+* sudo /etc/init.d/ntp start
+

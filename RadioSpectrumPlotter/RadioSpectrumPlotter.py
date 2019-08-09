@@ -1,28 +1,36 @@
 import xlrd  # Reading an excel file
 import matplotlib.pyplot as plt  # Plotting
+from prettytable import PrettyTable  # printing data
 
 
 def extract_data():
-    xlsx_location = ("data/example_drive_away_from_ap.xlsx")
+    # xlsx_location = ("data/example_data.xlsx")
+    xlsx_location = ("data/RF-profiling_Bronnoy_01062019.xlsx")
 
     workbook = xlrd.open_workbook(xlsx_location)
     sheets = [workbook.sheet_by_index(0), workbook.sheet_by_index(1)]
 
-    x_data = range(0, sheets[0].nrows - 1)
+    x_data = [] # range(0, sheets[0].nrows - 1)*5
+    for i in range(1, sheets[0].nrows):
+        x_data.append(sheets[0].cell_value(i, 0))
     y_data = []
     label_names = []
+    connecting_prop = []
     for i in range(len(sheets)):
         sheets[i].cell_value(0, 0)
         label_names.append(sheets[i].cell_value(0, 0))
         y_buffer = []
+        connecting_prop_buf = []
         for j in range(1, sheets[i].nrows):
             y_nested_buffer = []
             for k in range(1, 4):
                 value = round(sheets[i].cell_value(j, k), 4)
                 y_nested_buffer.append(value)
             y_buffer.append(y_nested_buffer)
+            connecting_prop_buf.append(sheets[i].cell_value(j, 4))
+        connecting_prop.append(connecting_prop_buf)
         y_data.append(y_buffer)
-    return x_data, y_data, label_names
+    return x_data, y_data, connecting_prop, label_names
 
 
 def calculate_average(y_data):
@@ -36,18 +44,28 @@ def calculate_average(y_data):
     return y_avg
 
 
-def print_data(x, y, avg):
+def print_data(x, y, avg, pr):
+    table = PrettyTable()
+    table.field_names = ["x_data", "y_data_0", "y_data_0_avg", "connection_pr_0",
+                         "y_data_1", "y_data_1_avg", "connection_pr_1"]
+
     for i in range(len(x)):
-        data_message_x0 = "x_data: " + str(x[i])
-        data_message_y0 = "\t y_data0: " + str(y[0][i]) + "\t y_data0_avg: " + str(avg[0][i])
-        data_message_y1 = "\t y_data1: " + str(y[1][i]) + "\t y_data1_avg: " + str(avg[1][i])
-        data_message = data_message_x0 + data_message_y0 + data_message_y1
-        print data_message
+        table.add_row([str(x[i]), str(y[0][i]), str(avg[0][i]), pr[0][i], str(y[1][i]), str(avg[1][i]), pr[1][i]])
+    print table
 
 
-def plot(x_axis, y_axis, y_avg, label_names):
-    colors = [['lightblue', 'lightgreen'], ['blue', 'green']]
+def setup_plotter():
     plt.style.use('ggplot')
+    plt.subplots_adjust(hspace=.025)
+
+
+def show_plots():
+    plt.title('AIR-ANT 2588P3M-N directional antenna')
+    plt.xticks(range(0, int(x_signal_data[-1]), 10))
+    plt.show()
+
+
+def plot_signal_strength(x_axis, y_axis, y_avg, label_names):
 
     ax1 = plt.subplot(1, 1, 1)
     for i in range(len(y_axis)):
@@ -56,12 +74,27 @@ def plot(x_axis, y_axis, y_avg, label_names):
 
     ax1.set_ylabel("Signal strength (dBm)")
     ax1.set_xlabel('Distance (meter)')
-
     plt.legend()
-    plt.show()
 
 
-x_signal_data, y_signal_data, labels = extract_data()
+def plot_connection_pr(x_axis, y_avg, pr, label_names):
+    ax1 = plt.subplot(2, 1, 2)
+    for i in range(len(y_avg)):
+        ax1.plot(x_axis, pr[i], marker='.', color=colors[1][i], label=label_names[i], drawstyle='steps-pre')
+
+    ax1.set_ylabel("Connection probability")
+    ax1.set_xlabel('Distance (meter)')
+    plt.legend()
+
+
+# Parse data from Excel
+x_signal_data, y_signal_data, connection_pr, labels = extract_data()
 y_signal_avg = calculate_average(y_signal_data)
-print_data(x_signal_data, y_signal_data, y_signal_avg)
-plot(x_signal_data, y_signal_data, y_signal_avg, labels)
+print_data(x_signal_data, y_signal_data, y_signal_avg, connection_pr)
+
+# Plot data
+colors = [['lightblue', 'lightgreen'], ['blue', 'green']]
+setup_plotter()
+plot_signal_strength(x_signal_data, y_signal_data, y_signal_avg, labels)
+#plot_connection_pr(x_signal_data, y_signal_avg, connection_pr, labels)
+show_plots()

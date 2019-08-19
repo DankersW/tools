@@ -37,3 +37,11 @@ Set the date using an NTP server
 #### Server side
 * sudo /etc/init.d/ntp start
 
+### MBLMT
+
+Run MBLMT code without installing the libs
+
+```sh
+LD_LIBRARY_PATH=/usr/local/lib/mblmt/ MBLMTCore ~/path/file.mod
+```
+

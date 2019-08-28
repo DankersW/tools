@@ -19,20 +19,30 @@ class FikaList:
     def create_excel(self):
         workbook = xlsxwriter.Workbook('fike_list.xlsx')
         worksheet = workbook.add_worksheet()
+        workbook.formats[0].set_font_size(28)
 
-        bold = workbook.add_format({'bold': True})
-        worksheet.write(0, 0, 'Week', bold)
-        worksheet.write(0, 1, 'Name', bold)
-
+        data = list()
         for i in range(len(self.names)):
-            worksheet.write(i+1, 0, self.week_numbers[i])
-            worksheet.write(i+1, 1, self.names[i])
+            data.append([self.week_numbers[i], self.names[i]])
+
+        table_size = 'A1:B' + str((len(data)+1))
+        worksheet.add_table(table_size, {'columns': [{'header': 'Week'},
+                                                     {'header': 'Name'}]})
+
+        week_number_column_format = workbook.add_format({'align': 'center',
+                                                         'font_size': 28})
+        name_column_format = workbook.add_format({'font_size': 28})
+        for i in range(len(self.names)):
+            worksheet.write(i+1, 0, self.week_numbers[i], week_number_column_format)
+            worksheet.write(i+1, 1, self.names[i], name_column_format)
+
+        # Set column size
+        worksheet.set_column(0, 0, 8)
+        worksheet.set_column(1, 1, 25)
 
         workbook.close()
 
 
 if __name__ == '__main__':
-    fikaList = FikaList(15)
-    fikaList.create_excel()
-
-
+    fika_list = FikaList(36)
+    fika_list.create_excel()

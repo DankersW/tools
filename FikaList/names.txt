@@ -1,8 +1,6 @@
 Wouter Dankers
-Daniel Hausknecht
 Tommy Svensson
 Oscar Hall
-Negin Fathollah Nejad Asl
 Per Sandstrom
 Marcus Larsson
 Patrik Isaksson
@@ -10,3 +8,4 @@ Edvin Valtersson
 Wen Xu
 Boris Atanassow
 Hossein Zakizadeh
+Roman Iustin

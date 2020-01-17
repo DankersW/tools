@@ -45,3 +45,8 @@ Run MBLMT code without installing the libs
 LD_LIBRARY_PATH=/usr/local/lib/mblmt/ MBLMTCore ~/path/file.mod
 ```
 
+### READ-ONLY File system
+On a corrupt file system. Find out which directory is currept then run the following command
+```sh
+e2fsck -fp /dev/<device>
+```

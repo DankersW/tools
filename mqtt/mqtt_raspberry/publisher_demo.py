@@ -10,7 +10,6 @@ MQTT_STAYALIVE = 60
 
 topic = sys.argv[1]
 data = sys.argv[2]
-
 print("topic: " + str(topic) + "\t data: " + str(data))
 
 client = mqtt.Client()

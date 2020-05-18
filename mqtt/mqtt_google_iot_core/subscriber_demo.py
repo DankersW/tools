@@ -42,6 +42,8 @@ def error_str(rc):
 
 
 class Device(object):
+    device_active = True
+
     def __init__(self):
         self.temperature = 0
         self.connected = False
@@ -72,13 +74,20 @@ class Device(object):
             print('Subscription failed.')
 
     def on_message(self, unused_client, unused_userdata, message):
+        # Example string to send " {"temperature": 25, "deviceActive": 0} "
         payload = message.payload.decode('utf-8')
-        if not payload:
-            print("no payload")
-            return
-        data = json.loads(payload)
         print('Received message \'{}\' on topic \'{}\' with Qos {}'.format(payload, message.topic, str(message.qos)))
-        print(data)
+
+        try:
+            data = json.loads(payload)
+            if "temperature" in data:
+                self.temperature = data["temperature"]
+            if "deviceActive" in data:
+                self.device_active = data["deviceActive"]
+        except ValueError as e:
+            print("error when decoding JSON: {}".format(e))
+
+        print("temp: {} - device_active: {}".format(self.temperature, self.device_active))
 
 
 def main():
@@ -102,29 +111,15 @@ def main():
 
     client.connect(args.mqtt_bridge_hostname, args.mqtt_bridge_port)
     client.loop_start()
-
-    mqtt_telemetry_topic = '/devices/{}/events'.format(args.device_id)
-    mqtt_state_topic = '/devices/{}/state'.format(args.device_id)
-    mqtt_commands_topic = '/devices/{}/commands/#'.format(args.device_id)
-
     device.wait_for_connection(5)
+
+    mqtt_commands_topic = '/devices/{}/commands/#'.format(args.device_id)
     client.subscribe(mqtt_commands_topic, qos=1)
 
-    for _ in range(args.num_messages):
-        device.temperature += 1
-        payload = json.dumps({'temperature': device.temperature, 'other': 12})
-        print('Publishing payload: {} - Topic: {}'.format(payload, mqtt_telemetry_topic))
-        client.publish(mqtt_telemetry_topic, payload, qos=1)
+    while device.device_active:
+        client.loop()
 
-        if device.temperature % 10 == 0:
-            state = device.temperature % 20
-            state_payload = json.dumps({'state': state})
-            print('Publishing payload: {} - Topic: {}'.format(state_payload, mqtt_state_topic))
-            client.publish(mqtt_state_topic, state_payload, qos=1)
-
-        time.sleep(1)
-
-    time.sleep(10)
+    time.sleep(2)
     client.disconnect()
     client.loop_stop()
     print('Finished loop successfully. Goodbye!')

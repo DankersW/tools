@@ -117,7 +117,7 @@ def main():
     client.subscribe(mqtt_commands_topic, qos=1)
 
     while device.device_active:
-        client.loop()
+        time.sleep(0.1)
 
     time.sleep(2)
     client.disconnect()

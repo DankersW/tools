@@ -49,6 +49,8 @@ class GBridge(threading.Thread):
     pending_messages = []
     pending_subscribed_topics = []
 
+    received_messages_queue = []
+
     def __init__(self):
         threading.Thread.__init__(self)
         gateway_configuration = MqttGatewayConfiguration()
@@ -146,6 +148,11 @@ class GBridge(threading.Thread):
         current_time = datetime.datetime.now()
         print('{} - {} | Received message \'{}\' on topic \'{}\'.'.format(current_time, GATEWAY_NAME,payload,
                                                                           message.topic))
+        if not payload:
+            return
+        device_id = self.get_id_from_topic(message.topic)
+        message = [device_id, payload]
+        self.received_messages_queue.append(message)
 
     def attach_device(self, device_id):
         current_time = datetime.datetime.now()
@@ -193,8 +200,21 @@ class GBridge(threading.Thread):
             current_time = datetime.datetime.now()
             print("{} - {} | Error: Unknown event type {}.".format(current_time, GATEWAY_NAME, event_type))
             return
-
         self.publish(topic, payload)
+
+    def get_last_message(self):
+        if len(self.received_messages_queue) > 0:
+            return self.received_messages_queue.pop(0)
+        else:
+            return None
+
+    @staticmethod
+    def get_id_from_topic(self, topic):
+        index_device_id = 2
+        dir_tree = topic.split('/')
+        if len(dir_tree) != 4 or dir_tree[1] != "devices":
+            return None
+        return dir_tree[index_device_id]
 
 
 def main():

@@ -2,6 +2,14 @@
 
 ## Commands
 
+### Windows 10 ubuntu bash: mount USB extrernal hard-drive
+```sh
+sudo mkdir /media/<NAME>
+sudo mount -t drvfs D: /media/<NAME>
+# un-mount
+sudo umount /media/<NAME>
+```
+
 ## Tools
 
 ### WPA_Supplipicant

@@ -2,6 +2,18 @@
 
 ## Commands
 
+### Share ssh keys between Windows and WSL
+```sh
+sudo umount /mnt/c
+sudo mount -t drvfs C: /mnt/c -o metadata
+ln -s /mnt/c/Users/<username>/.ssh ~/.ssh
+# Add the following to /etc/wsl.conf (remove hashtags)
+# [automount]
+# options = "metadata"
+chmod 400 /mnt/c/Users/<USER>/.ssh/id_rsa
+chmod 400 /mnt/c/Users/<USER>/.ssh/id_rsa.pub
+```
+
 ### Windows 10 ubuntu bash: mount USB extrernal hard-drive
 ```sh
 sudo mkdir /media/<NAME>

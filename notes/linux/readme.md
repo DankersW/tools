@@ -13,6 +13,8 @@ ln -s /mnt/c/Users/<username>/.ssh ~/.ssh
 chmod 600 /mnt/c/Users/<USER>/.ssh/id_rsa
 chmod 600 /mnt/c/Users/<USER>/.ssh/id_rsa.pub
 ```
+Followed by changing the permissions on Windows for that file. 
+https://superuser.com/questions/1296024/windows-ssh-permissions-for-private-key-are-too-open
 
 ### Windows 10 ubuntu bash: mount USB extrernal hard-drive
 ```sh

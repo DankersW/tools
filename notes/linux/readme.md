@@ -1,6 +1,6 @@
 # Linux commands and build-in tools
 
-## Commands
+## WSL
 
 ### Share ssh keys between Windows and WSL
 ```sh

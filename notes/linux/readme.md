@@ -10,8 +10,8 @@ ln -s /mnt/c/Users/<username>/.ssh ~/.ssh
 # Add the following to /etc/wsl.conf (remove hashtags)
 # [automount]
 # options = "metadata"
-chmod 400 /mnt/c/Users/<USER>/.ssh/id_rsa
-chmod 400 /mnt/c/Users/<USER>/.ssh/id_rsa.pub
+chmod 600 /mnt/c/Users/<USER>/.ssh/id_rsa
+chmod 600 /mnt/c/Users/<USER>/.ssh/id_rsa.pub
 ```
 
 ### Windows 10 ubuntu bash: mount USB extrernal hard-drive

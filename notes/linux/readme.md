@@ -1,4 +1,4 @@
-# Linux commands and build-in tools
+# Usefull Linux commands to remember
 
 ## WSL
 
@@ -26,6 +26,14 @@ sudo umount /media/<NAME>
 
 ## Tools
 
+### SCP
+Upload a file to a remote server
+```sh
+scp <FILE> <USERNAME>@<SERVER>:~<LOCATION>
+# Example 
+scp ocp_system_build_blackduck/* a293795@ocp-yocto-dev-2.ess.volvo.net:~/development/ci-util/python/jobs/ocp_system_build_blackduck/
+```
+
 ### WPA_Supplipicant
 
 Wpa_supplicant is a free software implementation of an IEEE 802.11i supplicant for Linux, FreeBSD, NetBSD, QNX, AROS, Microsoft Windows, Solaris, OS/2 and Haiku. In addition to being a fully featured WPA2 supplicant, it also implements WPA and older wireless LAN security protocols
@@ -51,13 +59,20 @@ tcpdump -i eth0 udp -n
 
 ### NTP
 
-#### Airboard
-  
 Set the date using an NTP server 
-* ntpdate -b 10.42.0.15
+```sh
+ntpdate -b <server_ip>
+```
+Server side
+```sh
+sudo /etc/init.d/ntp start
+```
 
-#### Server side
-* sudo /etc/init.d/ntp start
+### READ-ONLY File system
+On a corrupt file system. Find out which directory is currept then run the following command
+```sh
+e2fsck -fp /dev/<device>
+```
 
 ### MBLMT
 
@@ -65,10 +80,4 @@ Run MBLMT code without installing the libs
 
 ```sh
 LD_LIBRARY_PATH=/usr/local/lib/mblmt/ MBLMTCore ~/path/file.mod
-```
-
-### READ-ONLY File system
-On a corrupt file system. Find out which directory is currept then run the following command
-```sh
-e2fsck -fp /dev/<device>
 ```

@@ -1,4 +1,4 @@
-# Web API
+# Flask Web API
 
 Flask wrapper to use object oriented way, use together with uwsgi server.
 

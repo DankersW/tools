@@ -29,9 +29,9 @@ sudo umount /media/<NAME>
 ### SCP
 Upload a file to a remote server
 ```sh
-scp <FILE> <USERNAME>@<SERVER>:~<LOCATION>
+scp -rf <FILE> <USERNAME>@<SERVER>:~<LOCATION>
 # Example 
-scp ocp_system_build_blackduck/* a293795@ocp-yocto-dev-2.ess.volvo.net:~/development/ci-util/python/jobs/ocp_system_build_blackduck/
+scp -rp ocp_system_build_blackduck/* a293795@ocp-yocto-dev-2.ess.volvo.net:~/development/ci-util/python/jobs/ocp_system_build_blackduck/
 ```
 
 ### WPA_Supplipicant

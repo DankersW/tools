@@ -13,6 +13,11 @@ docker ps
 docker exec -it <container ID> /bin/bash
 ```
 
+## Connect to a remote Docker daemon with this 1 liner:
+```
+echo "export DOCKER_HOST=tcp://localhost:2375" >> ~/.bashrc && source ~/.bashrc
+```
+
 ## Execute a command in Docker container
 ```
 docker exec -it <container name> <command>

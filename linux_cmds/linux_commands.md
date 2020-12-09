@@ -24,6 +24,21 @@ sudo mount -t drvfs D: /media/<NAME>
 sudo umount /media/<NAME>
 ```
 
+## Proxy
+
+### Add Proxy settings to Environment variables
+
+add to ``` /etc/environment```.
+```sh
+export http_proxy=http://cloudpxgot.srv.volvo.com:8080
+export https_proxy=https://cloudpxgot.srv.volvo.com:8080
+export ftp_proxy=http://cloudpxgot1.srv.volvo.com:8080
+export no_proxy=localhost,127.0.0.1,.volvo.net,.volvo.com,10.42.0.11
+```
+```sh
+sudo netplan apply
+```
+
 ## Tools
 
 ### SCP

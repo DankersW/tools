@@ -62,3 +62,38 @@ if __name__ == '__main__':
     html_generator = HtmlGenerator()
     html_doc = html_generator.get_html_str()
 ```
+
+## OOP: Python approach to function overloading
+Combination of the facade pattern and function overloading
+```python
+from typing import Union
+
+class A:
+    def print(self, msg: Union[int, float, str, list]) -> str:
+        type_map = {
+            str: self._print,
+            int: self._print_decimal,
+            float: self._print_decimal,
+            list: self._print_list
+        }       
+        return type_map.get(type(msg), self._print_type_error)(msg=msg)
+    
+    def _print_type_error(self, msg):
+        raise TypeError('bad type')
+    
+    @staticmethod
+    def _print(msg: str) -> str:
+        return msg    
+
+    def _print_decimal(self, msg: Union[int, float]) -> str:
+        return self.print(msg=str(msg))
+    
+    def _print_list(self, msg: list) -> str:
+        return self.print(msg="".join(msg))
+
+if __name__ == '__main__':
+    a = A()
+    a.print(12)
+    a.print('12')
+    a.print(['1', '2'])
+```

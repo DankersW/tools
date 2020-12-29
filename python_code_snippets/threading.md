@@ -46,3 +46,36 @@ threaths = ['a', 'b', 'c']
 with concurrent.futures.ThreadPoolExecutor() as executor:
     [executor.submit(foo, threat_name, more_param=12) for threat_name in threaths]
 ```
+
+## Wait for threat to be started
+
+```python
+from threading import Thread, Event
+import time
+
+class T1(Thread):
+    def __init__(self, thread_event: Event):
+        Thread.__init__(self)
+        self._ready_event = thread_event
+
+    def run(self) -> None:
+        time.sleep(2)
+        print("T1: ready")
+        self._ready_event.set()
+
+class T2(Thread):
+    def __init__(self, thread_event: Event):
+        Thread.__init__(self)
+        self._ready_event = thread_event
+
+    def run(self) -> None:
+        time.sleep(5)
+        print("T2: ready")
+        self._ready_event.set()
+
+thread_ready = Event()
+observers = [T1(thread_event=thread_ready), T2(thread_event=thread_ready)]
+for obs in observers:
+    obs.start()
+    thread_ready.wait()
+```

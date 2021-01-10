@@ -54,4 +54,21 @@ def test_function():
         result = a.multiply_var_a(2) # result is 30 now, not 24
 ```
 
+## Mocking an entire class
+```python
+from unittest import mock
+
+class A:
+    pass
+    
+class MockA:
+    pass
+    
+    
+@mock.patch("project.path.to.A")
+def test_function(mock_get_var_a):
+    mock_get_var_a.return_value = MockA
+    
+```
+
 

@@ -22,3 +22,11 @@ echo "export DOCKER_HOST=tcp://localhost:2375" >> ~/.bashrc && source ~/.bashrc
 ```
 docker exec -it <container name> <command>
 ```
+
+## Docker push
+Push image to docker hub
+```
+docker login -u dankersw
+docker tag docker_image:latest dankersw/dockerhub:docker_image_name
+docker push dankersw/dockerhub:docker_image_name
+```

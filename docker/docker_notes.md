@@ -27,6 +27,6 @@ docker exec -it <container name> <command>
 Push image to docker hub
 ```
 docker login -u dankersw
-docker tag docker_image:latest dankersw/dockerhub:docker_image_name
-docker push dankersw/dockerhub:docker_image_name
+docker tag docker_image:latest dankersw/docker_repo:tag
+docker push dankersw/docker_repo:tag
 ```

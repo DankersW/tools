@@ -1,0 +1,5 @@
+add_library(testLib STATIC SimpleMath.cpp)
+
+add_executable(cpp_test_project_exe main.cpp)
+
+target_link_libraries(cpp_test_project_exe PUBLIC testLib)

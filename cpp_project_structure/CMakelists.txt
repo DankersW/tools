@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.1...3.19)
 
 set(CMAKE_CXX_STANDARD 17)
 if (NOT CMAKE_INSTALL_PREFIX)
@@ -8,9 +8,12 @@ if (NOT CMAKE_INSTALL_BINDIR)
     set(CMAKE_INSTALL_BINDIR bin)
 endif()
 
-project(cpp_test_project 
+project(
+    cpp_project_structure
     VERSION 1.0
-    DESCRIPTION "Template C++ project structure")
+    DESCRIPTION "Template C++ project structure"
+    LANGUAGES CXX
+)
 
 enable_testing()
 

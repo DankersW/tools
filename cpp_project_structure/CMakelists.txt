@@ -20,7 +20,8 @@ enable_testing()
 include_directories(
     external
     src
+    test
 )
 
 add_subdirectory(src)
-#add_subdirectory(test)
+add_subdirectory(test)

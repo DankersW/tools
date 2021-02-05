@@ -1,1 +1,6 @@
-add_library(loggerLib STATIC Logger.cpp)
+add_library(
+    loggerLib 
+    STATIC 
+    
+    Logger.cpp
+)

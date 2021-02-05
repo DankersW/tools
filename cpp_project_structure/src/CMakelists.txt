@@ -1,0 +1,17 @@
+add_library(testLib STATIC SimpleMath.cpp)
+
+include_directories(logger)
+add_subdirectory(logger)
+
+add_executable( 
+    ${CMAKE_PROJECT_NAME} 
+    main.cpp
+)
+
+target_link_libraries( 
+    ${CMAKE_PROJECT_NAME} 
+    PUBLIC 
+    
+    testLib 
+    loggerLib
+)

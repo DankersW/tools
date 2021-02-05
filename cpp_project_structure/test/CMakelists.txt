@@ -1,0 +1,23 @@
+project(cpp_structure_tests)
+
+include_directories(
+    ../src
+    ../src/logger
+)
+
+add_executable(CppProjectStructerTests
+    main.cpp
+
+    TestLogger.cpp
+    TestSimpleMath.cpp
+)
+
+target_link_libraries(CppProjectStructerTests 
+    testLib
+    loggerLib
+)    
+
+add_test(
+    ${CMAKE_PROJECT_NAME} 
+    CppProjectStructerTests
+)

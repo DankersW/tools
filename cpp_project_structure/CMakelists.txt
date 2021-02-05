@@ -1,0 +1,27 @@
+cmake_minimum_required(VERSION 3.1...3.19)
+
+set(CMAKE_CXX_STANDARD 17)
+if (NOT CMAKE_INSTALL_PREFIX)
+    set(CMAKE_INSTALL_PREFIX /usr/local)
+endif()
+if (NOT CMAKE_INSTALL_BINDIR)
+    set(CMAKE_INSTALL_BINDIR bin)
+endif()
+
+project(
+    cpp_project_structure
+    VERSION 1.0
+    DESCRIPTION "Template C++ project structure"
+    LANGUAGES CXX
+)
+
+enable_testing()
+
+include_directories(
+    external
+    src
+    test
+)
+
+add_subdirectory(src)
+add_subdirectory(test)

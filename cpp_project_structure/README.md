@@ -21,4 +21,6 @@ cd build
 cd build
 cmake ..
 make test
+or 
+ctest --verbose
 ```

@@ -5,19 +5,25 @@ include_directories(
     ../src/logger
 )
 
-add_executable(CppProjectStructerTests
-    main.cpp
 
-    TestLogger.cpp
+# Test SrcRoot
+add_executable(TestSrcRoot
+    main.cpp
     TestSimpleMath.cpp
 )
-
-target_link_libraries(CppProjectStructerTests 
+target_link_libraries(TestSrcRoot 
     testLib
-    loggerLib
-)    
+)   
 
-add_test(
-    ${CMAKE_PROJECT_NAME} 
-    CppProjectStructerTests
+# Test logger
+add_executable(TestLogger
+    main.cpp
+    TestLogger.cpp
 )
+target_link_libraries(TestLogger
+    loggerLib
+)  
+
+
+add_test(NAME test_src_root COMMAND TestSrcRoot)
+add_test(NAME test_logger COMMAND TestLogger)

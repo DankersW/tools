@@ -10,7 +10,7 @@ while getopts "u:" opt; do
     case "${opt}" in
         u)
             if [ "$OPTARG" == "work" ] || [ "$OPTARG" == "home" ]; then
-                USER=$OPTARG
+               	GIT_USER=$OPTARG
             else
                 help unsupported user $OPTARG
             fi
@@ -22,16 +22,16 @@ while getopts "u:" opt; do
 done
 shift $((OPTIND -1))
 
-if [ -z "$USER" ]; then
-    help Specify user
+if [ -z "$GIT_USER" ]; then
+    help Specify git user
 fi
 
-echo "Setting git config to the $USER user"
-if [ "$USER" == "work" ]; then
+echo "Setting git config to the $GIT_USER user"
+if [ "$GIT_USER" == "work" ]; then
     git config --global user.email "wouter.dankers@vinnter.se"
     git config --global  user.name "Wouter Dankers"
     
-elif [ "$USER" == "home" ]; then
+elif [ "$GIT_USER" == "home" ]; then
     git config --global user.email "wouter.dankers@skynet.be"
     git config --global user.name "DankersW"
 fi

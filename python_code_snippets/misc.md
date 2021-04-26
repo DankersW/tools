@@ -15,6 +15,25 @@ result = safe_deep_get(example_dct, 'NA', 'a', 'b')  # Result = 'test'
 result = safe_deep_get(example_dct, 'NA', 'a', 'c')  # Result = 'NA'
 ```
 
+## Convert dictionary to namedTuple
+```python
+from collections import namedtuple
+from typing import NamedTuple
+
+
+def convert_dict_to_named_tuple(tuple_name: str, dictionary: dict) -> NamedTuple:
+    return namedtuple(tuple_name, dictionary.keys())(**dictionary)
+
+
+dct = {"a": 1, "b": 2}
+my_tuple = convert_dict_to_named_tuple(tuple_name="my_tuple", dictionary=dct)
+
+on_line_conv = namedtuple("tuple_name", dct.keys())(**dct)
+
+print(my_tuple.a)
+print(on_line_conv.a)
+```
+
 ## Looping over static functions from a different class 
 ```python
 class Functions:

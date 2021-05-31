@@ -1,6 +1,7 @@
 # Good to remember GIT commands
 
 ## Rebase
+
 ```shell
 git checkout master
 git pull origin master
@@ -10,17 +11,21 @@ git push -f origin [branch-name]
 ```
 
 ## Squash commits
+
 ```shell
 git rebase -i HEAD~[number-of-commits]
 ```
+
 in VM selected the first on to be ```e``` and the others write ```s```
 
 ## Clean-up outdated branch references
+
 ```shell
 git remote prune origin
 ```
 
 ## Renaming local and remote
+
 ```shell
 # Rename the local branch to the new name
 git branch -m <old_name> <new_name>

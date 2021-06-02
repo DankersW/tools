@@ -39,3 +39,14 @@ git push <remote> <new_name>
 # Reset the upstream branch for the new_name local branch
 git push <remote> -u <new_name>
 ```
+
+## Alterning commit author
+
+```shell
+# Switch user to the new author
+git log
+git checkout <commit-you-want-to-change>
+git commit --amend --author "New Author Name <New Author Email>" # --> gives a new hash
+git checkout <orgininal-branch>
+git rebase -i <new-hash>
+```

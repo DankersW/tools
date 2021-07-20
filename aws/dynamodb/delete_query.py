@@ -1,5 +1,6 @@
 import boto3
 from boto3.dynamodb.conditions import Key
+from time import time
 
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table('vayyar_home_c2c_room_status')

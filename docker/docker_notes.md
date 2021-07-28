@@ -23,6 +23,11 @@ echo "export DOCKER_HOST=tcp://localhost:2375" >> ~/.bashrc && source ~/.bashrc
 docker exec -it <container name> <command>
 ```
 
+Start a shell inside a new container
+```sh
+docker run --rm -it --entrypoint /bin/bash <image_name>
+```
+
 ## Docker push
 Push image to docker hub
 ```

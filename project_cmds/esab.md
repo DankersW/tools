@@ -36,3 +36,12 @@ echo "change |PermitRootLogin yes| "
 
 systemctl restart ssh
 ```
+
+### gRPC
+
+Building the gRPC files for python
+```sh
+pip3 install .
+pip3 install grpcio-tools
+make grpc
+```

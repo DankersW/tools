@@ -54,6 +54,35 @@ def test_function():
         result = a.multiply_var_a(2) # result is 30 now, not 24
 ```
 
+## Checking if a mock is called or not
+
+See all other [Assert](https://docs.python.org/3/library/unittest.mock.html#the-mock-class)
+
+
+```python
+from unittest import mock
+
+class A:
+    def __init__(self):
+        self.foo()
+        self.bar(12)
+    def foo(self):
+        return None
+    def bar(self, num) -> str:
+        return "ok"
+    def fun(self):
+        return "hi"
+    
+@mock.patch.object(A, 'fun', return_value=None)
+@mock.patch.object(A, 'bar', return_value=None)
+@mock.patch.object(A, 'foo', return_value=None)
+def test_function(mock_foo, mock_bar, mock_fun):
+    a = A()
+    mock_foo.assert_called_once()
+    mock_bar.assert_called_once_with(12)
+    mock_fun.assert_not_called()
+```   
+
 ## Mocking an entire class
 ```python
 from unittest import mock

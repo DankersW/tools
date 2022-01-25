@@ -45,3 +45,12 @@ pip3 install .
 pip3 install grpcio-tools
 make grpc
 ```
+
+## Curl
+```sh
+# Post with data
+curl --header "Content-Type: application/json" --request POST --data '{"file_path": "/home/iotgw/edge.ecf"}' 192.168.0.103:8080/api/upgrade
+
+# File upload
+curl -F 'file=@test_file.txt' 192.168.0.103:8080/api/upgrade
+```

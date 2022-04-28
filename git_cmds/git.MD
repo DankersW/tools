@@ -12,6 +12,15 @@ git push -f origin [branch-name]
 
 ## Squash commits
 
+Squash all commits into one with MAIN as base branch
+```shell
+git checkout [branch-name]
+git reset $(git merge-base main $(git branch --show-current))
+git add -A
+git commit -m "one commit on yourBranch"
+git push --force origin upstream-branch
+```
+
 ```shell
 git rebase -i HEAD~[number-of-commits]
 ```

@@ -16,3 +16,10 @@ clone a repo:
 scripts:
     - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/vinnter/pyro/firectrl-core.git
 ```
+
+get latest artifact from a branch in a repo:
+
+```yml
+scripts:
+    - 'curl --location --output core.zip --header "JOB-TOKEN: $CI_JOB_TOKEN" https://gitlab.com/vinnter/pyro/firectrl-core/-/jobs/artifacts/development/download?job=build_core_g2'
+```

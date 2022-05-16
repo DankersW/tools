@@ -7,3 +7,12 @@
 # https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html
 echo "machine gitlab.com login YOUR_EMAIL_ADDRESS password YOUR_ACCESS_TOKEN" >> ~/.netrc
 ```
+
+## CI
+
+clone a repo:
+
+```yml
+scripts:
+    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/vinnter/pyro/firectrl-core.git
+```

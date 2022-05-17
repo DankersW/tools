@@ -1,4 +1,4 @@
-# Usefull Linux commands to remember
+# Useful Linux commands to remember
 
 ## WSL
 

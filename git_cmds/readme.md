@@ -13,6 +13,7 @@ git push -f origin [branch-name]
 ## Squash commits
 
 Squash all commits into one with MAIN as base branch
+
 ```shell
 git checkout [branch-name]
 git reset $(git merge-base main $(git branch --show-current))

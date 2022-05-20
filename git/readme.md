@@ -60,3 +60,10 @@ git commit --amend --author "New Author Name <New Author Email>" # --> gives a n
 git checkout <orgininal-branch>
 git rebase -i <new-hash>
 ```
+
+## Tagging
+
+```sh
+git tag -a v<x.x.x> -m "<A release summary message>"
+git push --tags
+```
